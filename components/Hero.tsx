@@ -7,6 +7,7 @@ export default function Hero() {
   const handleScroll = () => {};
   return (
     <div className="hero">
+      {/* hero left - desc*/}
       <div className="flex-1 pt-36 padding-x">
         <h3 className="hero__title">
           원하는 차를 찾고, 예약하고, 렌트하고 - 빠르고 쉽게!
@@ -22,11 +23,13 @@ export default function Hero() {
           containerStyles="bg-primary-blue text-white rounded-full mt-10"
         />
       </div>
+
+      {/* hero right - img */}
       <div className="hero__image-container">
         <div className="hero__image">
-          <Image src="/hero.png" alt="hero" fill className="object-contain"/>
-          <div className="hero__image-overlay"/>
+          <Image src="/hero.png" alt="hero" fill className="object-contain" />
         </div>
+          <div className="hero__image-overlay" />
       </div>
     </div>
   );
