@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { CarProps } from "@/types";
-import { CarDetail, CustomButton } from "./index";
+import { CarDetails, CustomButton } from "./index";
 import { calculateCarRent } from "@/util";
 
 interface CarCardProps {
@@ -78,7 +78,8 @@ export default function CarCard({ car }: CarCardProps) {
       </div>
       {/* 카드 하단 */}
 
-      <CarDetail />
+    {/* 더보기 버튼 누르면 뜨는 팝업 구현 */}
+      <CarDetails isOpen={isOpen} closeModel={() => setIsOpen(false)} car={car}/>
     </div>
   );
 }
