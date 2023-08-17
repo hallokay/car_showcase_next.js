@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { Dialog, Transition } from '@headlessui/react';
 import { CarProps } from '@/types';
+import { generateCarImgUrl } from '@/util/index'
 
 
 interface CarDetailsProps {
@@ -43,9 +44,10 @@ export default function CarDetails({ isOpen, closeModel, car }: CarDetailsProps)
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
+                {/* 실질적 팝업 화면창 */}
                 <Dialog.Panel
                   className={
-                    "relative w-full max-w-lg max-h-[90] overflow-y-auto transform rounded-2xl bg-white text-left shadow-xsl transiton-all flex flex-col gap-5"
+                    "relative w-full max-w-lg max-h-[90] p-6 overflow-y-auto transform rounded-2xl bg-white text-left shadow-xl transiton-all flex flex-col gap-5"
                   }
                 >
                   <button
@@ -67,7 +69,7 @@ export default function CarDetails({ isOpen, closeModel, car }: CarDetailsProps)
                     {/* 상단 이미지 박스 */}
                     <div className="relative w-full h-40 bg-pattern bg-center rounded-lg">
                       <Image
-                        src={"/hero.png"}
+                        src={generateCarImgUrl(car, 'angle')}
                         className="object-contain"
                         alt="car model"
                         fill
@@ -78,7 +80,7 @@ export default function CarDetails({ isOpen, closeModel, car }: CarDetailsProps)
                     <div className="flex gap-3">
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src={"/hero.png"}
+                          src={generateCarImgUrl(car, '29')}
                           className="object-contain"
                           alt="car model"
                           fill
@@ -87,7 +89,7 @@ export default function CarDetails({ isOpen, closeModel, car }: CarDetailsProps)
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src={"/hero.png"}
+                          src={generateCarImgUrl(car, '33')}
                           className="object-contain"
                           alt="car model"
                           fill
@@ -96,7 +98,7 @@ export default function CarDetails({ isOpen, closeModel, car }: CarDetailsProps)
                       </div>
                       <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                         <Image
-                          src={"/hero.png"}
+                          src={generateCarImgUrl(car, '13')}
                           className="object-contain"
                           alt="car model"
                           fill
@@ -112,8 +114,11 @@ export default function CarDetails({ isOpen, closeModel, car }: CarDetailsProps)
                     <h2 className='font-semobold text-xl capitalize'>{car.make}{car.model}</h2>
                     <div className="mt-3 flex flex-wrap gap-4">
                       {/* key-value값을 그대로 가져오기 */}
-                      {Object.entries(car).map((item) => (
-                        <div></div>
+                      {Object.entries(car).map(([key, val]) => (
+                        <div className='flex justify-between gap-5 w-full text-right' key={key}>
+                          <h4 className='text-grey capitalize'>{key.split("_").join(" ")}</h4>
+                          <p className='text-black-100 font-semibold'>{val}</p>
+                        </div>
                       ))}
                     </div>
                   </div>

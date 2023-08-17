@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { CarProps } from "@/types";
 import { CarDetails, CustomButton } from "./index";
-import { calculateCarRent } from "@/util";
+import { calculateCarRent, generateCarImgUrl } from "@/util";
 
 interface CarCardProps {
   car: CarProps;
@@ -32,7 +32,7 @@ export default function CarCard({ car }: CarCardProps) {
 
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src={"/hero.png"}
+          src={generateCarImgUrl(car)}
           className="object-contain"
           alt="car model"
           fill
@@ -66,20 +66,20 @@ export default function CarCard({ car }: CarCardProps) {
         {/* 카드 하단 아이콘 */}
 
         <div className="car-card__btn-container">
-          <CustomButton 
-          title='View More'
-          containerStyles="w-full py-[16px] rounded-full bg-primary-blue" 
-          textStyles="text-white text-[14px] leading-[17px] font-bold"
-          rightIcon='/right-arrow.svg'
-          handleClick={() => setIsOpen(true)}  
+          <CustomButton
+            title='View More'
+            containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
+            textStyles="text-white text-[14px] leading-[17px] font-bold"
+            rightIcon='/right-arrow.svg'
+            handleClick={() => setIsOpen(true)}
           />
         </div>
         {/* car-card__btn-container */}
       </div>
       {/* 카드 하단 */}
 
-    {/* 더보기 버튼 누르면 뜨는 팝업 구현 */}
-      <CarDetails isOpen={isOpen} closeModel={() => setIsOpen(false)} car={car}/>
+      {/* 더보기 버튼 누르면 뜨는 팝업 구현 */}
+      <CarDetails isOpen={isOpen} closeModel={() => setIsOpen(false)} car={car} />
     </div>
   );
 }
