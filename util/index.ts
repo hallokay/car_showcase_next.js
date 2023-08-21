@@ -50,3 +50,15 @@ export const generateCarImgUrl = (car: CarProps, angle?: string) => {
 
   return `${url}`
 }
+
+// 검색한 키워드를 URL에 반영해줌
+export const updateSearchParams = (type: string, value: string) => {
+
+  const searchParams = new URLSearchParams(window.location.search);
+
+  searchParams.set(type, value);
+
+  const newPathname = `${window.location.pathname}?${searchParams.toString()}`
+
+  return newPathname;
+}
