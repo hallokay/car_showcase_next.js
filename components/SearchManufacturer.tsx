@@ -11,6 +11,7 @@ import { manufacturers } from '@/constants'
 
 export default function SearchManufacturer({ manufacturer, setManufacturer }: SearchManufacturerProps) {
   const [query, setQuery] = useState('');
+
   const filteredManufacturers =
     query === ""
       ? manufacturers
@@ -23,14 +24,14 @@ export default function SearchManufacturer({ manufacturer, setManufacturer }: Se
 
   return (
     <div className='search-manufacturer'>
-      <Combobox>
+      <Combobox value={manufacturer} onChange={setManufacturer}>
         <div className="relative w-full">
           <Combobox.Button className='absolute top-[14px]' >
             <Image src='/car-logo.svg' alt='car-logo' width={20} height={20} className='ml-4' />
           </Combobox.Button>
           <Combobox.Input className="search-manufacturer__input"
             placeholder='Volkswagen'
-            displayValue={(manufacturer: string) => manufacturer}
+            displayValue={(item: string) => item}
             onChange={(e) => setQuery(e.target.value)}
 
           />
@@ -42,7 +43,10 @@ export default function SearchManufacturer({ manufacturer, setManufacturer }: Se
             afterLeave={() => setQuery('')}
           >
 
-            <Combobox.Options>
+            <Combobox.Options
+              className={'absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-black ring-1 ring-opacity-5 focus:outline-none sm:text-sm'}
+              static
+            >
               {
                 // filteredManufacturers.length === 0 &&
                 //   query !== "" ? (
@@ -54,25 +58,50 @@ export default function SearchManufacturer({ manufacturer, setManufacturer }: Se
                 //     Create "{query}"
                 //   </Combobox.Option>
                 // ) : (
-                filteredManufacturers.map((item) => (
-                  <Combobox.Option
-                    key={item}
-                    value={item}
-                    className={({ active }) => `
-                    relative search-manufacturer__option
-                    ${active ? 'bg-primary-blue text-white' : 'text-gray-900'} 
-                    `}
 
+                filteredManufacturers.length === 0 && query !== "" ? (
+                  <Combobox.Option
+                    value={query}
+                    className={'search-manufacturer__option'}
                   >
-                    {item}
+                    Create "{query}"
                   </Combobox.Option>
-                ))
+                ) : (
+
+                  filteredManufacturers.map((item) => (
+
+                    <Combobox.Option
+                      key={item}
+                      value={item}
+                      className={({ active }) =>
+                        `relative search-manufacturer__option ${active ? "bg-primary-blue text-white" : "text-gray-900"
+                        }`
+                      }
+                    >
+                      {({ selected, active }) => (
+                        <>
+                          <span className={`block truncate ${selected ? "font-medium" : 'font-normal'}`}>
+                            {item}
+                          </span>
+
+                          {/* 옵션이 선택되면 배경이 파랗게. */}
+                          {selected ? (
+                            <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? "text-white" : "text-pribg-primary-purple"}`}></span>
+                          ) : null}
+                        </>
+                      )}
+
+                    </Combobox.Option>
+                  ))
+                )
+
+
                 // )
               }
             </Combobox.Options>
           </Transition>
         </div>
-      </Combobox>
-    </div>
+      </Combobox >
+    </div >
   )
 }

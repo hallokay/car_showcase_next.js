@@ -1,17 +1,17 @@
-"use client"; 
+"use client";
 
 import React from "react";
 import Image from "next/image";
 import { CustomButton } from "./index";
 export default function Hero() {
-  const handleScroll = () => {};
+  const handleScroll = () => { };
   return (
     <div className="hero">
       {/* hero left - desc*/}
       <div className="flex-1 pt-36 padding-x">
-        <h3 className="hero__title">
+        <h1 className="hero__title">
           원하는 차를 찾고, 예약하고, 렌트하고 - 빠르고 쉽게!
-        </h3>
+        </h1>
 
         <p className="hero__subtitle">
           Streamline your car rental experience with our effortless booking
@@ -29,7 +29,7 @@ export default function Hero() {
         <div className="hero__image">
           <Image src="/hero.png" alt="hero" fill className="object-contain" />
         </div>
-          <div className="hero__image-overlay" />
+        <div className="hero__image-overlay" />
       </div>
     </div>
   );
